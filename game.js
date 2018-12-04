@@ -92,23 +92,23 @@ document.getElementById("add-points").addEventListener("click", function(){
   } else {alert('Please name your colony.');}
 });
 document.getElementById('add-tools').addEventListener("click", function(){ 
-  if (colony.addReward(rewards[0] == true) {
+  if (colony.addReward(rewards[0]) == true) {
     game.buildProgressBoardElement(rewards[0]);
   } 
 });
 document.getElementById('add-shack').addEventListener("click", function(){ 
-  if (colony.addReward(rewards[1] == true)
+  if (colony.addReward(rewards[1]) == true)
     game.buildProgressBoardElement(rewards[1]);
 });
 document.getElementById('add-house').addEventListener("click", function(){ 
-  if (colony.addReward(rewards[2] == true)
+  if (colony.addReward(rewards[2]) == true)
     game.buildProgressBoardElement(rewards[2]);
 });
 document.getElementById('add-factory').addEventListener("click", function(){ 
-  if (colony.addReward(rewards[3] == true)
+  if (colony.addReward(rewards[3]) == true)
     game.buildProgressBoardElement(rewards[3]);
 });
 document.getElementById('add-lab').addEventListener("click", function(){ 
-  if (colony.addReward(rewards[4] == true)
+  if (colony.addReward(rewards[4]) == true)
     game.buildProgressBoardElement(rewards[4]);
 });
