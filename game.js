@@ -1,17 +1,15 @@
 class Colony {
   constructor() {
+    this.name = '';
     this.scrap = 0;
     this.food = 100;
     this.scrapMultiplier = 1
-        
     this.rewards = [];
-
     this.allowedPopulation = 1;
     this.survivors = 0;
   }
-  updateMoney(scrp) {
+  updateScrap(scrp) {
     this.scrap += scrp;
-    scrapCounter.textContent = `${this.scrap} Scrap`;
   }
   updateStatsNewestReward(reward) {
     this.scrapMultiplier *= reward[2];
@@ -31,22 +29,38 @@ class Colony {
     this.rewards.push(reward);
     updateStatsNewestReward(reward);
   }
+  addReward(reward) {
+    if (this.scrap >= reward[1]) {
+      updateStatsNewestReward(reward);
+      updateScrap(-reward[1]);
+      return true;
+    } else {
+      return false;
+    }
+  }
   get allowedPopulation() {
     return Math.floor(this.scrap / 10000) + Math.floor(this.food / 1000); 
   }
 }
 
-const nameYourColony = () => {
-  let nameOfColony = '';
-  nameElement.textContent = nameOfColony;
+class GameState {
+  constructor() {
+    this.foodCost = 100 * 1;
+    this.wanderingSurvivors = 20;
+    this.climate = climate[0];
+    this.progressBoard = document.getElementById('game-progress-text');
+    this.scrapCounter = document.getElementById('point-counter');
+    this.colonyName = document.getElementById('name-of-colony');
+  }
+  updateScrapCounter() {
+    scrapCounter.textContent = `${colony.scrap.toFixed()} Scrap`;
+  }
+  buildProgressBoardElement() {
+    this.progressBoard.textContent.append(` ${reward[0]} |`)
+  }
 }
-let nameElement = document.getElementById('name-of-colony')
-let points = 1;
-let pointMultiplier = 1;
-let cats = 1;
-let progressBoard = document.getElementById('game-progress-text');
-let progressBoardRewardCounter = 0;
-let pointCounter = document.getElementById('point-counter');
+
+
 let rewards = [
   ['Tools', 25, 1.1, 0],
   ['Shack', 50, 1, 1],
@@ -54,36 +68,46 @@ let rewards = [
   ['Factory', 200, 2, 0],
   ['Laboratory', 350, 3.5, 3]
 ];
-
-const updatePoints = (pts) => {
-  points += pts;
-  pointCounter.textContent = `${points.toFixed(1)} Points`
-};
-
-const buildProgressBoardRow = () => {
-  let newRowElement = document.createElement('DIV');
-  newRowElement.className = "row";
-  newRowElement.id = `${progressBoardRewardCounter}th row`
-  progressBoard.appendChild(newRowElement);
-  progressBoard = newRowElement;
-}
-
-const buildProgressBoardElement = (type) => {
-  progressBoard.textContent += ' ' + type + ' |';
-}
-
-const addReward = (reward) => {
-  if (points >= reward[1]) {
-    pointMultiplier *= reward[2];
-    cats += reward[3];
-    updatePoints(-reward[1]);
-    buildProgressBoardElement(reward[0]);
+let climates = [
+  ['Radiated Sunshine', 1],
+  ['Ash Overcast', .8],
+  ['Deadly Winds', .5],
+  ['Acid Rain', .3],
+  ['Nuclear Winter', .1]
+];
+document.getElementById("add-colony-name").addEventListener("click", function(){
+  colonyName = document.getElementById('colony-name-input').value;
+  if (colonyName != '') {
+    colony.name = colonyName;
+    game.colonyName.textContent = colonyName;
+  } else {
+    alert('Please type a name for your colony.');
+  }
+});
+document.getElementById("add-points").addEventListener("click", function(){ 
+  if (colony.name != '') {
+  colony.updateScrap(1 * this.survivors * this.scrapMultiplier);
+  game.updateScrapCounter();
+  } else {alert('Please name your colony.');}
+});
+document.getElementById('add-tools').addEventListener("click", function(){ 
+  if (colony.addReward(rewards[0] == true) {
+    game.buildProgressBoardElement(rewards[0]);
   } 
-}
-
-document.getElementById("add-points").addEventListener("click", function(){ updatePoints(1 * cats * pointMultiplier); });
-document.getElementById('add-tools').addEventListener("click", function(){ addReward(rewards[0]); });
-document.getElementById('add-shack').addEventListener("click", function(){ addReward(rewards[1]); });
-document.getElementById('add-house').addEventListener("click", function(){ addReward(rewards[2]); });
-document.getElementById('add-factory').addEventListener("click", function(){ addReward(rewards[3]); });
-document.getElementById('add-lab').addEventListener("click", function(){ addReward(rewards[4]); });
+});
+document.getElementById('add-shack').addEventListener("click", function(){ 
+  if (colony.addReward(rewards[1] == true)
+    game.buildProgressBoardElement(rewards[1]);
+});
+document.getElementById('add-house').addEventListener("click", function(){ 
+  if (colony.addReward(rewards[2] == true)
+    game.buildProgressBoardElement(rewards[2]);
+});
+document.getElementById('add-factory').addEventListener("click", function(){ 
+  if (colony.addReward(rewards[3] == true)
+    game.buildProgressBoardElement(rewards[3]);
+});
+document.getElementById('add-lab').addEventListener("click", function(){ 
+  if (colony.addReward(rewards[4] == true)
+    game.buildProgressBoardElement(rewards[4]);
+});
