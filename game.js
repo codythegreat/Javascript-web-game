@@ -20,7 +20,7 @@ class Colony {
     this.food = 100;
     this.scrapMultiplier = 1
     this.rewards = [];
-    this.survivors = 0;
+    this.survivors = 1;
   }
   updateScrap(scrp) {
     this.scrap += scrp;
