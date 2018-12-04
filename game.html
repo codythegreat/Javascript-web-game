@@ -12,25 +12,23 @@
     </div>
     <div class="container" id="body-container">
       <div class="row" id="game-data">
-        <div class="col-4" id="game-text" style="text-align: center;"">
+        <div class="col-8" id="game-text" style="text-align: center;"">
           <p id="point-counter"></p>
-          <button type="button" class="btn btn-success">Add Tools</button><p> + 10% efficiency | 25 points</p> 
-          <button type="button" class="btn btn-success">Add Shack</button><p> + 1 cat | 50 points</p> 
-          <button type="button" class="btn btn-success">Add House</button><p> + 3 cats | 120 points</p>
-          <button type="button" class="btn btn-success">Add Factory</button><p> + 100% efficiency | 200 points</p> 
-          <button type="button" class="btn btn-success">Add Laboratory</button><p> + 250% efficiency and + 3 cats | 350 points</p>  
+          <button type="button" class="btn btn-success" id="add-tools">Add Tools</button><p> + 10% efficiency | 25 points</p> 
+          <button type="button" class="btn btn-success" id="add-shack">Add Shack</button><p> + 1 cat | 50 points</p> 
+          <button type="button" class="btn btn-success" id="add-house">Add House</button><p> + 3 cats | 120 points</p>
+          <button type="button" class="btn btn-success" id="add-factory">Add Factory</button><p> + 100% efficiency | 200 points</p> 
+          <button type="button" class="btn btn-success" id="add-lab">Add Laboratory</button><p> + 250% efficiency and + 3 cats | 350 points</p>  
         </div>
-        <div class="col-8" id="game-progress" style="background-color: black;">
-          <div class="row">
-          	<div class="col" style="max-width: 25%;">
-          	  <p>hello</p>
-            </div>
+        <div class="col-4" id="game-progress" style="background-color: black;">
+          <p id="game-progress-text" style="text-align: center; color: white;">
           </div>
         </div>
       </div>
       <div class="container" id="button-container" style="text-align: center; margin-top: 20px;">
-        <button type="button" class="btn btn-primary">Points!</button>
+        <button type="button" class="btn btn-primary" id="add-points">Points!</button>
       </div>
     </div>
+    <script type="text/javascript" src="game.js"></script>
   </body>
 </html>
