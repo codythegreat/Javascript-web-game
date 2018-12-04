@@ -60,7 +60,8 @@ class GameState {
   }
 }
 
-
+let game = new GameState;
+let colony = new Colony;
 let rewards = [
   ['Tools', 25, 1.1, 0],
   ['Shack', 50, 1, 1],
