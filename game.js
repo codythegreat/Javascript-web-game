@@ -1,36 +1,38 @@
-class game {
+class Colony {
     constructor() {
-        this.money = 0;
+        this.scrap = 0;
         this.food = 100;
-        this.moneyMultiplier = 1
-        this.rewards = [];
+        this.scrapMultiplier = 1
+        
+	this.rewards = [];
 
         this.allowedPopulation = 1;
-        this.cats = 0;
+        this.survivors = 0;
     }
-    updateMoney(mny) {
-        this.money += mny;
-        moneyCounter.textContent = `${this.money} Cat Dollars`;
+    updateMoney(scrp) {
+        this.scrap += scrp;
+        scrapCounter.textContent = `${this.scrap} Scrap`;
     }
-    updateStatsNewestReward() {
-
+    updateStatsNewestReward(reward) {
+	this.scrapMultiplier *= reward[2];
+        this.survivors += reward[3];
     }
     updateStatsAllRewards() {
-        newMoneyMultiplier = 1;
-        newCats = 1;
+        newScrapMultiplier = 1;
+        newSurvivors = 1;
         for (let reward of this.rewards) {
-            newMoneyMultiplier *= reward[2];
-            newCats += reward[3]
+            newScrapMultiplier *= reward[2];
+            newSurvivors += reward[3]
         }
-        this.moneyMultiplier = newMoneyMultiplier;
-        this.cats = newCats;
+        this.scrapMultiplier = newScrapMultiplier;
+        this.survivors = newSurvivors;
     }
     updateRewards(reward) {
         this.rewards.push(reward);
-        updateStats();
+        updateStatsNewestReward(reward);
     }
     get allowedPopulation() {
-        return Math.floor(money / 10000) + Math.floor(food / 1000); 
+        return Math.floor(this.scrap / 10000) + Math.floor(this.food / 1000); 
     }
 }
 
