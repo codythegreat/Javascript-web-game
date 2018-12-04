@@ -63,11 +63,11 @@ class GameState {
     this.wanderingSurvivors = 20;
     this.climate = climates[0];
     this.progressBoard = document.getElementById('game-progress-text');
-    this.scrapCounter = document.getElementById('point-counter');
-    this.colonyName = document.getElementById('name-of-colony');
+    this.scrapCounter = document.getElementById('colony-scrap-text');
+    this.colonyName = document.getElementById('colony-name-text');
   }
   updateScrapCounter() {
-    scrapCounter.textContent = `${colony.scrap.toFixed()} Scrap`;
+    this.scrapCounter.textContent = `${colony.scrap.toFixed()} Scrap`;
   }
   buildProgressBoardElement() {
     this.progressBoard.textContent.append(` ${reward[0]} |`)
