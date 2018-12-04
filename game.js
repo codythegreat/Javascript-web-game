@@ -70,7 +70,7 @@ class GameState {
     this.scrapCounter.textContent = `${colony.scrap.toFixed()} Scrap`;
   }
   buildProgressBoardElement(reward) {
-    this.progressBoard.textContent.append(` ${reward[0]} |`)
+    this.progressBoard.textContent += ` ${reward[0]} |`;
   }
 }
 
