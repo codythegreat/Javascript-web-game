@@ -47,7 +47,7 @@ class GameState {
   constructor() {
     this.foodCost = 100 * 1;
     this.wanderingSurvivors = 20;
-    this.climate = climate[0];
+    this.climates = climate[0];
     this.progressBoard = document.getElementById('game-progress-text');
     this.scrapCounter = document.getElementById('point-counter');
     this.colonyName = document.getElementById('name-of-colony');
