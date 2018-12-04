@@ -88,7 +88,7 @@ document.getElementById("add-colony-name").addEventListener("click", function(){
 });
 document.getElementById("add-points").addEventListener("click", function(){ 
   if (colony.name != '') {
-  colony.updateScrap(1 * this.survivors * this.scrapMultiplier);
+  colony.updateScrap(1 * colony.survivors * colony.scrapMultiplier);
   game.updateScrapCounter();
   } else {alert('Please name your colony.');}
 });
