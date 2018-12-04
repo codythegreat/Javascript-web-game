@@ -1,3 +1,39 @@
+class game {
+    constructor() {
+        this.money = 0;
+        this.food = 100;
+        this.moneyMultiplier = 1
+        this.rewards = [];
+
+        this.allowedPopulation = 1;
+        this.cats = 0;
+    }
+    updateMoney(mny) {
+        this.money += mny;
+        moneyCounter.textContent = `${this.money} Cat Dollars`;
+    }
+    updateStatsNewestReward() {
+
+    }
+    updateStatsAllRewards() {
+        newMoneyMultiplier = 1;
+        newCats = 1;
+        for (let reward of this.rewards) {
+            newMoneyMultiplier *= reward[2];
+            newCats += reward[3]
+        }
+        this.moneyMultiplier = newMoneyMultiplier;
+        this.cats = newCats;
+    }
+    updateRewards(reward) {
+        this.rewards.push(reward);
+        updateStats();
+    }
+    get allowedPopulation() {
+        return Math.floor(money / 10000) + Math.floor(food / 1000); 
+    }
+}
+
 let points = 1;
 let pointMultiplier = 1;
 let cats = 1;
