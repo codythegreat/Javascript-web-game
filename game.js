@@ -20,7 +20,6 @@ class Colony {
     this.food = 100;
     this.scrapMultiplier = 1
     this.rewards = [];
-    this.allowedPopulation = 1;
     this.survivors = 0;
   }
   updateScrap(scrp) {
@@ -54,7 +53,7 @@ class Colony {
     }
   }
   get allowedPopulation() {
-    return Math.floor(this.scrap / 10000) + Math.floor(this.food / 1000); 
+    return 1 + Math.floor(this.scrap / 10000) + Math.floor(this.food / 1000); 
   }
 }
 
