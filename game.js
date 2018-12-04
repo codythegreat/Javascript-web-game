@@ -1,3 +1,18 @@
+let rewards = [
+  ['Tools', 25, 1.1, 0],
+  ['Shack', 50, 1, 1],
+  ['House', 100, 1, 3],
+  ['Factory', 200, 2, 0],
+  ['Laboratory', 350, 3.5, 3]
+];
+let climates = [
+  ['Radiated Sunshine', 1],
+  ['Ash Overcast', .8],
+  ['Deadly Winds', .5],
+  ['Acid Rain', .3],
+  ['Nuclear Winter', .1]
+];
+
 class Colony {
   constructor() {
     this.name = '';
@@ -62,20 +77,7 @@ class GameState {
 
 let game = new GameState;
 let colony = new Colony;
-let rewards = [
-  ['Tools', 25, 1.1, 0],
-  ['Shack', 50, 1, 1],
-  ['House', 100, 1, 3],
-  ['Factory', 200, 2, 0],
-  ['Laboratory', 350, 3.5, 3]
-];
-let climates = [
-  ['Radiated Sunshine', 1],
-  ['Ash Overcast', .8],
-  ['Deadly Winds', .5],
-  ['Acid Rain', .3],
-  ['Nuclear Winter', .1]
-];
+
 document.getElementById("add-colony-name").addEventListener("click", function(){
   colonyName = document.getElementById('colony-name-input').value;
   if (colonyName != '') {
