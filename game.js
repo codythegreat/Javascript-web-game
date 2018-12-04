@@ -41,12 +41,12 @@ class Colony {
   }
   updateRewards(reward) {
     this.rewards.push(reward);
-    updateStatsNewestReward(reward);
+    this.updateStatsNewestReward(reward);
   }
   addReward(reward) {
     if (this.scrap >= reward[1]) {
-      updateStatsNewestReward(reward);
-      updateScrap(-reward[1]);
+      this.updateStatsNewestReward(reward);
+      this.updateScrap(-reward[1]);
       return true;
     } else {
       return false;
