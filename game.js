@@ -1,10 +1,10 @@
 class Colony {
   constructor() {
-	  this.scrap = 0;
+    this.scrap = 0;
     this.food = 100;
     this.scrapMultiplier = 1
         
-	  this.rewards = [];
+    this.rewards = [];
 
     this.allowedPopulation = 1;
     this.survivors = 0;
@@ -14,7 +14,7 @@ class Colony {
     scrapCounter.textContent = `${this.scrap} Scrap`;
   }
   updateStatsNewestReward(reward) {
-	  this.scrapMultiplier *= reward[2];
+    this.scrapMultiplier *= reward[2];
     this.survivors += reward[3];
   }
   updateStatsAllRewards() {
@@ -37,9 +37,10 @@ class Colony {
 }
 
 const nameYourColony = () => {
-	
+  let nameOfColony = '';
+  nameElement.textContent = nameOfColony;
 }
-
+let nameElement = document.getElementById('name-of-colony')
 let points = 1;
 let pointMultiplier = 1;
 let cats = 1;
