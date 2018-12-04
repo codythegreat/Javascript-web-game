@@ -1,39 +1,43 @@
 class Colony {
-    constructor() {
-        this.scrap = 0;
-        this.food = 100;
-        this.scrapMultiplier = 1
+  constructor() {
+	  this.scrap = 0;
+    this.food = 100;
+    this.scrapMultiplier = 1
         
-	this.rewards = [];
+	  this.rewards = [];
 
-        this.allowedPopulation = 1;
-        this.survivors = 0;
+    this.allowedPopulation = 1;
+    this.survivors = 0;
+  }
+  updateMoney(scrp) {
+    this.scrap += scrp;
+    scrapCounter.textContent = `${this.scrap} Scrap`;
+  }
+  updateStatsNewestReward(reward) {
+	  this.scrapMultiplier *= reward[2];
+    this.survivors += reward[3];
+  }
+  updateStatsAllRewards() {
+    newScrapMultiplier = 1;
+    newSurvivors = 1;
+    for (let reward of this.rewards) {
+      newScrapMultiplier *= reward[2];
+      newSurvivors += reward[3]
     }
-    updateMoney(scrp) {
-        this.scrap += scrp;
-        scrapCounter.textContent = `${this.scrap} Scrap`;
-    }
-    updateStatsNewestReward(reward) {
-	this.scrapMultiplier *= reward[2];
-        this.survivors += reward[3];
-    }
-    updateStatsAllRewards() {
-        newScrapMultiplier = 1;
-        newSurvivors = 1;
-        for (let reward of this.rewards) {
-            newScrapMultiplier *= reward[2];
-            newSurvivors += reward[3]
-        }
-        this.scrapMultiplier = newScrapMultiplier;
-        this.survivors = newSurvivors;
-    }
-    updateRewards(reward) {
-        this.rewards.push(reward);
-        updateStatsNewestReward(reward);
-    }
-    get allowedPopulation() {
-        return Math.floor(this.scrap / 10000) + Math.floor(this.food / 1000); 
-    }
+    this.scrapMultiplier = newScrapMultiplier;
+    this.survivors = newSurvivors;
+  }
+  updateRewards(reward) {
+    this.rewards.push(reward);
+    updateStatsNewestReward(reward);
+  }
+  get allowedPopulation() {
+    return Math.floor(this.scrap / 10000) + Math.floor(this.food / 1000); 
+  }
+}
+
+const nameYourColony = () => {
+	
 }
 
 let points = 1;
