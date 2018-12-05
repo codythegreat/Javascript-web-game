@@ -163,6 +163,14 @@ const advanceOneGameDay = () => {
   } else {alert('Please name your colony.');}
 }
 
+const pointButtonLoading = () => {
+  document.getElementById("add-points").disabled = true;
+  document.getElementById("add-points").textContent = "Loading";
+  setTimeout(function() {
+    document.getElementById("add-points").disabled = false;
+  }, 2000);
+}
+
 document.getElementById('buy-food').addEventListener("click", function(){ 
   completeAllBuyFoodRequirements();
 });
@@ -174,11 +182,8 @@ document.getElementById("add-colony-name").addEventListener("click", function(){
 });
 
 document.getElementById("add-points").addEventListener("click", function(){ 
-  document.getElementById("add-points").disabled = true;
+  pointButtonLoading();
   advanceOneGameDay();
-  setTimeout(function() {
-    document.getElementById("add-points").disabled = false;
-  }, 3000);
 });
 
 document.getElementById('add-tools').addEventListener("click", function(){ 
