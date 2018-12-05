@@ -96,7 +96,7 @@ class GameState {
   	this.populationCounter.textContent = `${colony.survivors} Survivors`;
   }
   updateGameStats() {
-  	this.gameStatsDisplay.textContent = `Day:${this.currentDay} Climate:${this.climate[0]}`;
+  	this.gameStatsDisplay.textContent = `Day: ${this.currentDay} Climate: ${this.climate[0]}`;
   }
   buildProgressBoardElement(reward) {
     this.progressBoard.textContent += ` ${reward[0]} |`;
