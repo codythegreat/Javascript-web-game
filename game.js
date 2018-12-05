@@ -168,6 +168,7 @@ const pointButtonLoading = () => {
   document.getElementById("add-points").textContent = "Loading";
   setTimeout(function() {
     document.getElementById("add-points").disabled = false;
+    document.getElementById("add-points").textContent = "Advance One Day";
   }, 2000);
 }
 
