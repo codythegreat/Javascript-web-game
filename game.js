@@ -183,7 +183,9 @@ document.getElementById("add-colony-name").addEventListener("click", function(){
 
 document.getElementById("add-points").addEventListener("click", function(){ 
   pointButtonLoading();
-  advanceOneGameDay();
+  setTimeout(function() {
+    advanceOneGameDay();
+  }, 1900);
 });
 
 document.getElementById('add-tools').addEventListener("click", function(){ 
