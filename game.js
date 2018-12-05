@@ -17,7 +17,7 @@ class Colony {
   constructor() {
     this.name = '';
     this.scrap = 0;
-    this.food = 100;
+    this.food = 1000;
     this.scrapMultiplier = 1
     this.rewards = [];
     this.survivors = 1;
@@ -26,6 +26,9 @@ class Colony {
   }
   updateScrap(scrp) {
     this.scrap += scrp;
+  }
+  consume() {
+  	this.food = this.food - (this.survivors * Math.floor(Math.random()*4));
   }
   updateStatsNewestReward(reward) {
     this.scrapMultiplier *= reward[2];
@@ -141,12 +144,22 @@ const initColonyWithName = () => {
   }
 }
 
-const addAndUpdatePoints = () => {
+const gameOverIfZeroFood = () => {
+	if (colony.food <= 0) {
+	  alert('You have run out of food. Game over.');
+	  document.getElementById('add-points').style.visibility = "hidden";
+	}
+}
+
+const advanceOneGameDay = () => {
   if (colony.name != '') {
   colony.updateScrap(1 * colony.survivors * colony.scrapMultiplier * game.climate[1]);
+  colony.consume();
   game.incrementDay();
   game.updateScrapCounter();
+  game.updateFoodCounter();
   game.updateGameStats();
+  gameOverIfZeroFood();
   } else {alert('Please name your colony.');}
 }
 
@@ -156,10 +169,12 @@ document.getElementById('buy-food').addEventListener("click", function(){
 
 document.getElementById("add-colony-name").addEventListener("click", function(){
   initColonyWithName();
+  document.getElementById("add-colony-name").style.visibility = "hidden";
+  document.getElementById("colony-name-input").style.visibility = "hidden";
 });
 
 document.getElementById("add-points").addEventListener("click", function(){ 
-  addAndUpdatePoints();
+  advanceOneGameDay();
 });
 
 document.getElementById('add-tools').addEventListener("click", function(){ 
