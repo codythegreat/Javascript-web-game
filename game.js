@@ -42,7 +42,7 @@ class Colony {
     this.survivors = newSurvivors;
   }
   addReward(reward) {
-    if (this.scrap >= reward[1]) {
+    if (this.scrap >= reward[1] && (this.allowedPopulation - this.survivors) >= reward[3]) {
       this.rewards.push(reward);
       this.updateStatsNewestReward(reward);
       this.updateScrap(-reward[1]);
@@ -68,14 +68,17 @@ class Colony {
 
 class GameState {
   constructor() {
+  	this.currentDay = 1;
     this.foodCost = 100 * 1;
     this.wanderingSurvivors = 20;
     this.climate = climates[0];
     this.progressBoard = document.getElementById('game-progress-text');
     this.scrapCounter = document.getElementById('colony-scrap-text');
     this.foodCounter = document.getElementById('colony-food-text');
-    this.foodButtonText = document.getElementById('food-cost')
+    this.foodButtonText = document.getElementById('food-cost');
+    this.populationCounter = document.getElementById('colony-pop-text');
     this.colonyName = document.getElementById('colony-name-text');
+    this.gameStatsDisplay = document.getElementById('game-stats-text');
   }
   updateScrapCounter() {
     this.scrapCounter.textContent = `${colony.scrap.toFixed()} Scrap`;
@@ -86,8 +89,18 @@ class GameState {
   updateFoodButton() {
   	this.foodButtonText.textContent = `${(colony.foodPurchases + 1) * 100} scrap for 1000 food.`
   }
+  updatePopCounter() {
+  	this.populationCounter.textContent = `${colony.survivors} Survivors`;
+  }
+  updateGameStats() {
+  	this.gameStatsDisplay.textContent = `Day:${this.currentDay} Climate:${this.climate[0]}`;
+  }
   buildProgressBoardElement(reward) {
     this.progressBoard.textContent += ` ${reward[0]} |`;
+  }
+  incrementDay() {
+  	this.currentDay++;
+  	this.climate = climates[Math.floor(Math.random()*5)];
   }
 }
 
@@ -98,7 +111,8 @@ const completeAllRewardRequirements = (reward) => {
 	if (colony.addReward(reward) == true) {
     game.buildProgressBoardElement(reward);
     game.updateScrapCounter();
-	}
+    game.updatePopCounter();
+	} else {alert('You do not meet the requirements for this item.')}
 }
 
 const completeAllBuyFoodRequirements = () => {
@@ -109,27 +123,43 @@ const completeAllBuyFoodRequirements = () => {
 	}
 }
 
+const initColonyWithName = () => {
+  colonyName = document.getElementById('colony-name-input').value;
+  if (colonyName != '') {
+    colony.name = colonyName;
+    if (colonyName.length <= 20) {
+      game.colonyName.textContent = `Name: ${colonyName}`;
+    } else {
+      game.colonyName.textContent = `Name: ${colonyName.substring(0,20)}...`;
+    }
+    game.updateFoodCounter();
+    game.updateScrapCounter();
+    game.updatePopCounter();
+    game.updateGameStats();
+  } else {
+    alert('Please type a name for your colony.');
+  }
+}
+
+const addAndUpdatePoints = () => {
+  if (colony.name != '') {
+  colony.updateScrap(1 * colony.survivors * colony.scrapMultiplier * game.climate[1]);
+  game.incrementDay();
+  game.updateScrapCounter();
+  game.updateGameStats();
+  } else {alert('Please name your colony.');}
+}
+
 document.getElementById('buy-food').addEventListener("click", function(){ 
   completeAllBuyFoodRequirements();
 });
 
 document.getElementById("add-colony-name").addEventListener("click", function(){
-  colonyName = document.getElementById('colony-name-input').value;
-  if (colonyName != '') {
-    colony.name = colonyName;
-    game.colonyName.textContent = colonyName;
-    game.updateFoodCounter();
-    game.updateScrapCounter();
-  } else {
-    alert('Please type a name for your colony.');
-  }
+  initColonyWithName();
 });
 
 document.getElementById("add-points").addEventListener("click", function(){ 
-  if (colony.name != '') {
-  colony.updateScrap(1 * colony.survivors * colony.scrapMultiplier);
-  game.updateScrapCounter();
-  } else {alert('Please name your colony.');}
+  addAndUpdatePoints();
 });
 
 document.getElementById('add-tools').addEventListener("click", function(){ 
