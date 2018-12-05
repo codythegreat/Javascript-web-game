@@ -174,7 +174,11 @@ document.getElementById("add-colony-name").addEventListener("click", function(){
 });
 
 document.getElementById("add-points").addEventListener("click", function(){ 
+  document.getElementById("add-points").disabled = true;
   advanceOneGameDay();
+  setTimeout(function() {
+    document.getElementById("add-points").disabled = false;
+  }, 3000);
 });
 
 document.getElementById('add-tools').addEventListener("click", function(){ 
