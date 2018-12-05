@@ -12,7 +12,7 @@
     </div>
     <div class="container" id="body-container">
       <div class="row" id="game-data">
-        <div class="col-8" id="game-text" style="text-align: center; background-color: gray;">
+        <div class="col-8" id="game-text" style="text-align: center; background-color: gray; color: white;">
           <div class="row" id="game-counters">
             <div class="col-3" id="colony-name">
               <p id="colony-name-text"></p>
@@ -27,12 +27,18 @@
               <p id="colony-pop-text"></p>
             </div>
           </div>
-          <p id="point-counter"></p>
-          <button type="button" class="btn btn-success" id="add-tools">Add Tools</button><p> + 10% efficiency | 25 points</p> 
-          <button type="button" class="btn btn-success" id="add-shack">Add Shack</button><p> + 1 cat | 50 points</p> 
-          <button type="button" class="btn btn-success" id="add-house">Add House</button><p> + 3 cats | 120 points</p>
-          <button type="button" class="btn btn-success" id="add-factory">Add Factory</button><p> + 100% efficiency | 200 points</p> 
-          <button type="button" class="btn btn-success" id="add-lab">Add Laboratory</button><p> + 250% efficiency and + 3 cats | 350 points</p>  
+          <div class="row">
+            <div class="col-6">
+              <button type="button" class="btn btn-danger" id="buy-food">Buy Food</button><p id="food-cost">100 scrap for 1000 food</p>
+            </div>
+            <div class="col-6">
+              <button type="button" class="btn btn-success" id="add-tools">Add Tools</button><p> + 10% efficiency | 25 points</p> 
+              <button type="button" class="btn btn-success" id="add-shack">Add Shack</button><p> + 1 survivor | 50 points</p> 
+              <button type="button" class="btn btn-success" id="add-house">Add House</button><p> + 3 survivor | 120 points</p>
+              <button type="button" class="btn btn-success" id="add-factory">Add Factory</button><p> + 100% efficiency | 200 points</p> 
+              <button type="button" class="btn btn-success" id="add-lab">Add Laboratory</button><p> + 250% efficiency and + 3 survivor | 350 points</p>  
+            </div>
+          </div>
         </div>
         <div class="col-4" id="game-progress" style="background-color: black;">
           <p id="game-progress-text" style="text-align: center; color: white;">
