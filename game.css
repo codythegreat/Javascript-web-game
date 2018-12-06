@@ -1,1 +1,59 @@
-
+body {
+  background-image: url(wooden-board-wall.jpg);    /*#E0B5A1 (original background color)*/
+  font-family: 'Unlock', cursive;
+}
+.header-container {
+  text-align: center;
+  margin: 20px, auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: #BD876E;
+  color: white;
+}
+.header-text {
+  padding: 20px;
+}
+.game-text {
+  text-align: center; 
+  background-color: #BD876E; 
+  color: white;
+}
+.game-counters {
+  height: 150px;
+}
+.game-random-event {
+  height: 150px; 
+  text-align: center;
+}
+.random-event-text {
+  text-align: center;
+}
+.game-progress {
+  background-color: #9C6247;
+}
+.game-progress-text {
+  text-align: center; 
+  color: white;
+}
+.button-container {
+  text-align: center; 
+  margin-top: 20px;
+}
+.add-colony-name {
+  margin-left: 10px; 
+  margin-right: 10px;
+}
+.add-points {
+  margin-right: 10px; 
+  width: 170px;
+}
+.scrap-radio {
+  margin-left: 10px; 
+  margin-right: 10px;
+  color: white;
+}
+.food-radio {
+  margin-left: 10px; 
+  margin-right: 10px;
+  color: white;
+}
