@@ -26,6 +26,7 @@ body {
   height: 150px; 
   text-align: center;
   border-bottom: 3px dashed #9C6247;
+  margin-bottom: 20px;
 }
 .random-event-text {
   text-align: center;
