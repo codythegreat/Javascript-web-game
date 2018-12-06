@@ -356,6 +356,9 @@ const addElementForInventoryItem = (item) => {
   let btn = document.createElement('button');
   let btnTextNode = document.createTextNode(`${item[0]} | sell for ${item[1]} scrap`);
   btn.appendChild(btnTextNode);
+  btn.className = "btn btn-warning";
+  btn.type = "button";
+  btn.style.marginBottom = "10px";
   game.inventoryDisplay.appendChild(btn);
   btn.onclick = function() {
     colony.scrap += item[1];
