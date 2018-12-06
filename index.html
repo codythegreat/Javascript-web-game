@@ -20,7 +20,7 @@
     <div class="container" id="body-container">
       <div class="row" id="game-data">
         <div class="col-8" id="game-text" style="text-align: center; background-color: #BD876E; color: white;">
-          <div class="row" id="game-counters">
+          <div class="row" id="game-counters" style="height: 150px;">
             <div class="col-3" id="colony-name">
               <p id="colony-name-text"></p>
             </div>
@@ -37,6 +37,9 @@
               <p id="game-stats-text"></p>
             </div>
           </div>
+          <div class="row" id="game-random-event" style="height: 150px; text-align: center;">
+            <p id="random-event-text"></p>
+          </div>
           <div class="row">
             <div class="col-6">
               <button type="button" class="btn btn-danger" id="buy-food">Buy Food</button><p id="food-cost">100 scrap for 1000 food</p>
@@ -51,14 +54,15 @@
           </div>
         </div>
         <div class="col-4" id="game-progress" style="background-color: #9C6247;">
-          <p id="game-progress-text" style="text-align: center; color: white;">
+          <p id="game-progress-text" style="text-align: center; color: white;"></p>
+          <div class="container" id="inventory-display">
           </div>
         </div>
       </div>
       <div class="container" id="button-container" style="text-align: center; margin-top: 20px;">
         <div class="row">
           <input type="text" id="colony-name-input" value="">
-          <button type="button" class="btn btn-primary" id="add-colony-name">Name Colony</button>
+          <button type="button" class="btn btn-primary" id="add-colony-name" style="margin-left: 10px; margin-right: 10px">Name Colony</button>
           <button type="button" class="btn btn-primary" id="add-points">Advance One Day</button>
         </div>
       </div>
