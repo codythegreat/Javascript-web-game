@@ -344,7 +344,7 @@ const advanceOneGameDay = () => {
   if (colony.name != '') {
     if(document.getElementById('scrap-radio').checked) {
       colony.updateScrap(scrapAmountAllVariables());
-    } else {colony.updateFood(foodAmountsAllVariables());}
+    } else {colony.updateFood(foodAmountAllVariables());}
     colony.consume();
     game.incrementDay();
     game.updateScrapCounter();
