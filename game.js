@@ -416,6 +416,7 @@ document.getElementById("add-colony-name").addEventListener("click", function(){
   initColonyWithName();
   document.getElementById("add-colony-name").style.visibility = "hidden";
   document.getElementById("colony-name-input").style.visibility = "hidden";
+  document.getElementById("add-points").style.visibility = "visible";
 });
 
 document.getElementById("add-points").addEventListener("click", function(){
