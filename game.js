@@ -170,8 +170,9 @@ class Colony {
   constructor() {
     this.name = '';
     this.scrap = 0;
+    this.scrapMultiplier = 1;
     this.food = 1000;
-    this.scrapMultiplier = 1
+    this.foodMultiplier = 1;
     this.rewards = [];
     this.survivors = 1;
     this.foodPurchases = 0;
@@ -184,6 +185,9 @@ class Colony {
   }
   updateScrap(scrp) {
     this.scrap += scrp;
+  }
+  updateFood(fd) {
+    this.food += fd;
   }
   consume() {
   	this.food = this.food - (this.survivors * Math.floor(Math.random()*4));
@@ -321,25 +325,34 @@ const gameOverIfZeroSurvivors = () => {
 const scrapAmountAllVariables = () => {
   return colony.survivors * colony.scrapMultiplier * colony.tempScrapProd * game.climate[1];
 }
+const foodAmountAllVariables = () => {
+  return colony.survivors * colony.foodMultiplier * colony.tempFoodProd * game.climate[1];	
+}
+
+const resetRandomEventVariables = () => {
+  colony.tempScrapProd = 1;
+  colony.tempFoodProd = 1;
+  colony.disease = 0;
+  game.randomEventDisplay.textContent = '';
+}
 
 const advanceOneGameDay = () => {
   if (colony.randomEventTimer > 0) {colony.randomEventTimer--;}
   else {
-    colony.tempScrapProd = 1;
-    colony.tempFoodProd = 1;
-    colony.disease = 0;
-    game.randomEventDisplay.textContent = '';
+    resetRandomEventVariables();
   }
   if (colony.name != '') {
-  colony.updateScrap(scrapAmountAllVariables());
-  colony.consume();
-  game.incrementDay();
-  game.updateScrapCounter();
-  game.updateFoodCounter();
-  game.updatePopCounter();
-  game.updateGameStats();
-  gameOverIfZeroFood();
-  gameOverIfZeroSurvivors();
+    if(document.getElementById('scrap-radio').checked) {
+      colony.updateScrap(scrapAmountAllVariables());
+    } else {colony.updateFood(foodAmountsAllVariables());}
+    colony.consume();
+    game.incrementDay();
+    game.updateScrapCounter();
+    game.updateFoodCounter();
+    game.updatePopCounter();
+    game.updateGameStats();
+    gameOverIfZeroFood();
+    gameOverIfZeroSurvivors();
   } else {alert('Please name your colony.');}
 }
 
