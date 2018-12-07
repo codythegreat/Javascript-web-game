@@ -1,9 +1,16 @@
 let rewards = [
-  ['Tools', 25, 1.1, 0],
+  ['Tools', 25, 1.05, 0],
   ['Shack', 50, 1, 1],
   ['House', 100, 1, 3],
   ['Factory', 200, 2, 0],
   ['Laboratory', 350, 3.5, 3]
+];
+let foodRewards = [
+  ['Planter', 20, 1.05, 0],
+  ['Garden', 40, 1.12, -20],
+  ['Green House', 100, 1.25, 0],
+  ['Farm', 250, 2, -200],
+  ['Ranch', 1000, .25, -400],	//ranch looks bad on paper, but this also adds random events to harvest animals.
 ];
 let climates = [
   ['Radiated Sunshine', 1],
@@ -417,6 +424,8 @@ document.getElementById("add-colony-name").addEventListener("click", function(){
   document.getElementById("add-colony-name").style.visibility = "hidden";
   document.getElementById("colony-name-input").style.visibility = "hidden";
   document.getElementById("add-points").style.visibility = "inherit";
+  document.getElementById("scrap-radio").style.visibility = "inherit";
+  document.getElementById("food-radio").style.visibility = "inherit";
 });
 
 document.getElementById("add-points").addEventListener("click", function(){
