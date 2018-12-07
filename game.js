@@ -5,6 +5,41 @@ let rewards = [
   ['Factory', 200, 2, 0],
   ['Laboratory', 350, 3.5, 3]
 ];
+let ranchRandomEvents = [
+  {
+    text: 'A couple of chickens were harvested. +50 food',
+    scrapProdChange: 1,
+    foodProdChange: 1,
+    survivorChange: 0,
+    scrapChange: 0,
+    foodChange: 50,
+    diseaseChange: 0,
+    inventoryChange: null,
+    timer: 1,
+  },
+  {
+    text: 'A pig was harvested. +100 food',
+    scrapProdChange: 1,
+    foodProdChange: 1,
+    survivorChange: 0,
+    scrapChange: 0,
+    foodChange: 100,
+    diseaseChange: 0,
+    inventoryChange: null,
+    timer: 1,
+  },
+  {
+    text: 'A cow was harvested. +250 food',
+    scrapProdChange: 1,
+    foodProdChange: 1,
+    survivorChange: 0,
+    scrapChange: 0,
+    foodChange: 250,
+    diseaseChange: 0,
+    inventoryChange: null,
+    timer: 1,
+  },
+];
 let foodRewards = [
   ['Planter', 20, 1.05, 0],
   ['Garden', 40, 1.12, -20],
