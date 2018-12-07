@@ -171,10 +171,10 @@ class Colony {
     this.name = '';
     this.scrap = 0;
     this.scrapMultiplier = 1;
-    this.food = 1000;
+    this.food = 100;
     this.foodMultiplier = 1;
     this.rewards = [];
-    this.survivors = 1;
+    this.survivors = 3;
     this.foodPurchases = 0;
     this.inventory = [];
     this.tempScrapProd = 1;
