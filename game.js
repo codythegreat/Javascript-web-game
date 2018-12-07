@@ -211,7 +211,7 @@ let randomEvents = [
 class Colony {
   constructor() {
     this.name = '';
-    this.scrap = 0;
+    this.scrap = 50;
     this.scrapMultiplier = 1;
     this.food = 100;
     this.foodMultiplier = 1;
