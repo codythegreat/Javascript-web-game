@@ -426,6 +426,8 @@ document.getElementById("add-colony-name").addEventListener("click", function(){
   document.getElementById("add-points").style.visibility = "inherit";
   document.getElementById("scrap-radio").style.visibility = "inherit";
   document.getElementById("food-radio").style.visibility = "inherit";
+  document.getElementById("label-scrap-radio").style.visibility = "inherit";
+  document.getElementById("label-food-radio").style.visibility = "inherit";
 });
 
 document.getElementById("add-points").addEventListener("click", function(){
