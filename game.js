@@ -238,6 +238,9 @@ class Colony {
     this.scrapMultiplier *= reward[2];
     this.survivors += reward[3];
   }
+  updateStatsNewestFoodReward(reward) {
+    this.foodMultiplier *= reward[2];
+  }
   updateStatsAllRewards() {
     newScrapMultiplier = 1;
     newSurvivors = 1;
@@ -249,10 +252,21 @@ class Colony {
     this.survivors = newSurvivors;
   }
   addReward(reward) {
-    if (this.scrap >= reward[1] && ((this.allowedPopulation - this.survivors) >= reward[3] || reward[0] == 'Tools' || reward[0] == 'Factory')) {
+    if (this.scrap >= reward[1] && ((this.allowedPopulation - this.survivors) >= reward[3] || reward[3] == 0)) {
       this.rewards.push(reward);
       this.updateStatsNewestReward(reward);
       this.updateScrap(-reward[1]);
+      return true;
+    } else {
+      return false;
+    }
+  }
+  addFoodReward(reward) {
+    if (this.scrap >= reward[1]) {
+      this.rewards.push(reward);
+      this.updateStatsNewestReward(reward);
+      this.updateScrap(-reward[1]);
+      this.updateFood(reward[3]);
       return true;
     } else {
       return false;
@@ -322,6 +336,14 @@ const completeAllRewardRequirements = (reward) => {
     game.updateScrapCounter();
     game.updatePopCounter();
 	} else {alert('You do not meet the requirements for this item.');}
+}
+
+const completeAllFoodRewardRequirements = () => {
+  if (colony.addFoodReward(reward) == true) {
+    game.buildProgressBoardElement(reward);
+    game.updateScrapCounter();
+    game.updateFoodCounter();
+  } else {alert('You do not meet the requirements for this item.');}
 }
 
 const completeAllBuyFoodRequirements = () => {
