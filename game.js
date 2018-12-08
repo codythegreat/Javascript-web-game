@@ -1,3 +1,13 @@
+let tierOneRewards = [
+  ['Tools', 25],
+  ['Binoculars', 50],
+  ['Wheel Barrel', 100],
+  ['Metal Detectors', 200],
+  ['Power Tools', 400],
+  ['Trucks', 800],
+  ['GPS Mapping', 1600],
+  ['Drones', 3200]
+]
 let rewards = [
   ['Tools', 25, 1.05, 0],
   ['Shack', 50, 1, 1],
@@ -39,6 +49,15 @@ let ranchRandomEvents = [
     inventoryChange: null,
     timer: 1,
   },
+];
+let tierOneFoodRewards = [
+  ['Robust Pots', 40],
+  ['Nutritional Soil', 80],
+  ['Lights', 160],
+  ['Rain Collector', 320],
+  ['Pesticides', 640],
+  ['GMO Plants', 1280],
+  ['Camera Monitoring', 2560],
 ];
 let foodRewards = [
   ['Planter', 20, 1.05, 0],
@@ -232,7 +251,7 @@ class Colony {
     this.food += fd;
   }
   consume() {
-  	this.food = this.food - (this.survivors * Math.floor(Math.random()*4));
+  	this.food = this.food - (this.survivors * Math.floor(Math.random()*2));
   }
   updateStatsNewestReward(reward) {
     this.scrapMultiplier *= reward[2];
@@ -264,7 +283,7 @@ class Colony {
   addFoodReward(reward) {
     if (this.scrap >= reward[1]) {
       this.rewards.push(reward);
-      this.updateStatsNewestReward(reward);
+      this.updateStatsNewestFoodReward(reward);
       this.updateScrap(-reward[1]);
       this.updateFood(reward[3]);
       return true;
@@ -293,6 +312,8 @@ class GameState {
     this.foodCost = 100 * 1;
     this.wanderingSurvivors = 20;
     this.climate = climates[0];
+    this.currentToolReward = 0;
+    this.currentFoodReward = 0;
     this.progressBoard = document.getElementById('game-progress-text');
     this.scrapCounter = document.getElementById('colony-scrap-text');
     this.foodCounter = document.getElementById('colony-food-text');
@@ -307,7 +328,7 @@ class GameState {
     this.scrapCounter.textContent = `${colony.scrap.toFixed()} Scrap`;
   }
   updateFoodCounter() {
-  	this.foodCounter.textContent = `${colony.food} Food`;
+  	this.foodCounter.textContent = `${colony.food.toFixed()} Food`;
   }
   updateFoodButton() {
   	this.foodButtonText.textContent = `${(colony.foodPurchases + 1) * 100} scrap for 1000 food.`
@@ -338,7 +359,7 @@ const completeAllRewardRequirements = (reward) => {
 	} else {alert('You do not meet the requirements for this item.');}
 }
 
-const completeAllFoodRewardRequirements = () => {
+const completeAllFoodRewardRequirements = (reward) => {
   if (colony.addFoodReward(reward) == true) {
     game.buildProgressBoardElement(reward);
     game.updateScrapCounter();
@@ -513,4 +534,20 @@ document.getElementById('add-factory').addEventListener("click", function(){
 
 document.getElementById('add-lab').addEventListener("click", function(){ 
   completeAllRewardRequirements(rewards[4]);
+});
+
+document.getElementById('add-food-tier-1').addEventListener("click", function(){ 
+  completeAllFoodRewardRequirements(foodRewards[0]);
+});
+
+document.getElementById('add-garden').addEventListener("click", function(){ 
+  completeAllFoodRewardRequirements(foodRewards[1]);
+});
+
+document.getElementById('add-greenhouse').addEventListener("click", function(){ 
+  completeAllFoodRewardRequirements(foodRewards[2]);
+});
+
+document.getElementById('add-farm').addEventListener("click", function(){ 
+  completeAllFoodRewardRequirements(foodRewards[3]);
 });
