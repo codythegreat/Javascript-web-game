@@ -249,7 +249,7 @@ class Colony {
     this.survivors = newSurvivors;
   }
   addReward(reward) {
-    if ((this.scrap >= reward[1] && (this.allowedPopulation - this.survivors) >= reward[3]) || reward[0] == 'Tools' || reward[0] == 'Factory') {
+    if (this.scrap >= reward[1] && ((this.allowedPopulation - this.survivors) >= reward[3] || reward[0] == 'Tools' || reward[0] == 'Factory')) {
       this.rewards.push(reward);
       this.updateStatsNewestReward(reward);
       this.updateScrap(-reward[1]);
@@ -321,7 +321,7 @@ const completeAllRewardRequirements = (reward) => {
     game.buildProgressBoardElement(reward);
     game.updateScrapCounter();
     game.updatePopCounter();
-	} else {alert('You do not meet the requirements for this item.')}
+	} else {alert('You do not meet the requirements for this item.');}
 }
 
 const completeAllBuyFoodRequirements = () => {
@@ -329,7 +329,7 @@ const completeAllBuyFoodRequirements = () => {
     game.updateFoodCounter();
     game.updateFoodButton();
     game.updateScrapCounter();
-	}
+    } else {alert('You do not meet the requirements for this item.');}
 } 
 
 const initColonyWithName = () => {
