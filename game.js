@@ -447,7 +447,7 @@ const pointButtonLoading = () => {
   setTimeout(function() {
     document.getElementById("add-points").disabled = false;
     document.getElementById("add-points").textContent = "Advance One Day";
-  }, 2000);
+  }, 1000);
 }
 
 const addElementForInventoryItem = (item) => {
@@ -513,7 +513,7 @@ document.getElementById("add-points").addEventListener("click", function(){
   pointButtonLoading();
   setTimeout(function() {
     advanceOneGameDay();
-  }, 1900);
+  }, 900);
 });
 
 document.getElementById('add-tools').addEventListener("click", function(){ 
