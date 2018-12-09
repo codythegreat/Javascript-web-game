@@ -64,7 +64,7 @@ let foodRewards = [
   ['Planter', 20, 1.05, 0],
   ['Garden', 40, 1.12, 20],
   ['Green House', 100, 1.25, 0],
-  ['Farm', 250, 2, -200],
+  ['Farm', 250, 2, 200],
   ['Ranch', 1000, .25, 400],	//ranch looks bad on paper, but this also adds random events to harvest animals.
 ];
 let climates = [
