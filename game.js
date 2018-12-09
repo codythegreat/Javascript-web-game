@@ -62,10 +62,10 @@ let tierOneFoodRewards = [
 ];
 let foodRewards = [
   ['Planter', 20, 1.05, 0],
-  ['Garden', 40, 1.12, -20],
+  ['Garden', 40, 1.12, 20],
   ['Green House', 100, 1.25, 0],
   ['Farm', 250, 2, -200],
-  ['Ranch', 1000, .25, -400],	//ranch looks bad on paper, but this also adds random events to harvest animals.
+  ['Ranch', 1000, .25, 400],	//ranch looks bad on paper, but this also adds random events to harvest animals.
 ];
 let climates = [
   ['Radiated Sunshine', 1],
@@ -306,18 +306,18 @@ class Colony {
     }
   }
   addFoodReward(reward) {
-    if (this.scrap >= reward[1]) {
+    if (this.scrap >= reward[1] && this.food >= reward[3]) {
       this.rewards.push(reward);
       this.updateStatsNewestFoodReward(reward);
       this.updateScrap(-reward[1]);
-      this.updateFood(reward[3]);
+      this.updateFood(-reward[3]);
       return true;
     } else {
       return false;
     }
   }
   get allowedPopulation() {
-    return 1 + Math.floor(this.scrap / 10000) + Math.floor(this.food / 1000); 
+    return 1 + Math.floor(this.scrap / 10000) + Math.floor(this.food / 100); 
   }
   buyFood() {
   	if (this.scrap >= 100 * (this.foodPurchases + 1)) {
@@ -482,6 +482,7 @@ const addElementForInventoryItem = (item) => {
   btn.className = "btn btn-warning";
   btn.type = "button";
   btn.style.marginBottom = "10px";
+  btn.style.width = "100%";
   game.inventoryDisplay.appendChild(btn);
   btn.onclick = function() {
     colony.scrap += item[1];
