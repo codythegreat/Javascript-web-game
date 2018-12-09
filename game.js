@@ -553,12 +553,16 @@ document.getElementById("add-points").addEventListener("click", function(){
 });
 
 document.getElementById('add-tools').addEventListener("click", function(){ 
-  if (colony.addTierOneReward(tierOneRewards[colony.tierOneItems])) {
-    game.buildProgressBoardElement(tierOneRewards[colony.tierOneItems - 1]);
-    game.updateScrapCounter();
-    game.updatePopCounter();
-    updateRewardButtonElement();
-  } else {alert('You do not meet the requirements for this item.');}
+  if (tierOneRewards[colony.tierOneItems]) {
+    if (colony.addTierOneReward(tierOneRewards[colony.tierOneItems])) {
+      game.buildProgressBoardElement(tierOneRewards[colony.tierOneItems - 1]);
+      game.updateScrapCounter();
+      game.updatePopCounter();
+      updateRewardButtonElement();
+    } else {alert('You do not meet the requirements for this item.');}
+  } else {
+    alert("You've purchased all of the rewards available.");
+  }
 });
 
 document.getElementById('add-shack').addEventListener("click", function(){ 
@@ -586,7 +590,7 @@ document.getElementById('add-food-tier-1').addEventListener("click", function(){
       updateFoodRewardButtonElement();
     } else {alert('You do not meet the requirements for this item.');}
   } else {
-    alert("You've purchases all of the rewards available.")
+    alert("You've purchases all of the rewards available.");
   }
 });
 
