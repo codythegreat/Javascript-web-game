@@ -1,3 +1,5 @@
+import * from 'game-data';
+
 let tierOneRewards = [
   ['Tools', 25],
   ['Binoculars', 50],
