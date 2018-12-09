@@ -1,4 +1,4 @@
-import * from 'game-data';
+import 'game-data';
 
 let tierOneRewards = [
   ['Tools', 25],
