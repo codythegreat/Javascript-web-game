@@ -51,6 +51,7 @@ let ranchRandomEvents = [
   },
 ];
 let tierOneFoodRewards = [
+  ['Planters', 20],
   ['Robust Pots', 40],
   ['Nutritional Soil', 80],
   ['Lights', 160],
@@ -242,6 +243,8 @@ class Colony {
     this.tempFoodProd = 1;
     this.disease = 0;
     this.randomEventTimer = 0;
+    this.tierOneItems = 0;
+    this.tierOneFoodItems = 0;
     // this.maximumScrap = 1000
   }
   updateScrap(scrp) {
@@ -269,6 +272,28 @@ class Colony {
     }
     this.scrapMultiplier = newScrapMultiplier;
     this.survivors = newSurvivors;
+  }
+  addTierOneReward(reward) {
+    if (this.scrap >= reward[1]) {
+      this.rewards.push(reward);
+      this.scrapMultiplier *= 1.05;
+      this.updateScrap(-reward[1]);
+      this.tierOneItems++;
+      return true;
+    } else {
+      return false;
+    }
+  }
+  addTierOneFoodReward(reward) {
+    if (this.scrap >= reward[1]) {
+      this.rewards.push(reward);
+      this.foodMultiplier *= 1.05;
+      this.updateScrap(-reward[1]);
+      this.tierOneFoodItems++;
+      return true;
+    } else {
+      return false;
+    }
   }
   addReward(reward) {
     if (this.scrap >= reward[1] && ((this.allowedPopulation - this.survivors) >= reward[3] || reward[3] == 0)) {
@@ -493,6 +518,16 @@ const chanceOfRandomEventIfTimerZero = () => {
   }
 }
 
+const updateFoodRewardButtonElement = () => {
+  document.getElementById('add-food-tier-1').textContent = `Add ${tierOneFoodRewards[colony.tierOneFoodItems][0]}`;
+  document.getElementById('add-food-tier-1-cost').textContent = `5% food efficiency boost | ${tierOneFoodRewards[colony.tierOneFoodItems][1]} scrap`;
+}
+
+const updateRewardButtonElement = () => {
+  document.getElementById('add-tools').textContent = `Add ${tierOneRewards[colony.tierOneItems][0]}`;
+  document.getElementById('add-tools-text').textContent = `5% scrap efficiency boost | ${tierOneRewards[colony.tierOneItems][1]} scrap`;
+}
+
 document.getElementById('buy-food').addEventListener("click", function(){ 
   completeAllBuyFoodRequirements();
 });
@@ -517,7 +552,12 @@ document.getElementById("add-points").addEventListener("click", function(){
 });
 
 document.getElementById('add-tools').addEventListener("click", function(){ 
-  completeAllRewardRequirements(rewards[0]);
+  if (colony.addTierOneReward(tierOneRewards[colony.tierOneItems])) {
+    game.buildProgressBoardElement(tierOneRewards[colony.tierOneItems - 1]);
+    game.updateScrapCounter();
+    game.updatePopCounter();
+    updateRewardButtonElement();
+  } else {alert('You do not meet the requirements for this item.');}
 });
 
 document.getElementById('add-shack').addEventListener("click", function(){ 
@@ -537,7 +577,16 @@ document.getElementById('add-lab').addEventListener("click", function(){
 });
 
 document.getElementById('add-food-tier-1').addEventListener("click", function(){ 
-  completeAllFoodRewardRequirements(foodRewards[0]);
+  if (tierOneFoodRewards[colony.tierOneFoodItems]) {
+    if (colony.addTierOneFoodReward(tierOneFoodRewards[colony.tierOneFoodItems])) {
+      game.buildProgressBoardElement(tierOneFoodRewards[colony.tierOneFoodItems - 1]);
+      game.updateScrapCounter();
+      game.updatePopCounter();
+      updateFoodRewardButtonElement();
+    } else {alert('You do not meet the requirements for this item.');}
+  } else {
+    alert("You've purchases all of the rewards available.")
+  }
 });
 
 document.getElementById('add-garden').addEventListener("click", function(){ 
