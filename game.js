@@ -7,7 +7,47 @@ let tierOneRewards = [
   ['Trucks', 800],
   ['GPS Mapping', 1600],
   ['Drones', 3200]
-]
+];
+let rewardsByTier = {
+  1: [
+    ['Tools', 25],
+    ['Binoculars', 50],
+    ['Wheel Barrel', 100],
+    ['Metal Detectors', 200],
+    ['Power Tools', 400],
+    ['Trucks', 800],
+    ['GPS Mapping', 1600],
+    ['Drones', 3200]
+  ],
+  2: [
+    ['Shack', 50],
+    ['Tree House', 100],
+    ['Modular House', 200],
+    ['Small Bunker', 400],
+    ['Converted Van', 800],
+  ],
+  3: [
+    ['Cabin', 100],
+    ['House', 200],
+    ['Garage', 400],
+    ['Bunker', 800],
+    ['Mansion', 1600],
+  ],
+  4: [
+    ['Shop', 200],
+    ['Junk Yard', 400],
+    ['Construction Yard', 800],
+    ['Factory', 1600],
+    ['Armory', 3200],
+  ],
+  5: [
+    ['Basic Filtration System', 350],
+    ['Chemical Work Stations', 750],
+    ['Large Scale Filtration', 1500],
+    ['Laboratory', 3000],
+    ['Medical Laboratory', 6000],
+  ]
+}
 let rewards = [
   ['Tools', 25, 1.05, 0],
   ['Shack', 50, 1, 1],
