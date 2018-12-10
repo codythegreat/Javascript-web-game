@@ -10,7 +10,7 @@ let tierOneRewards = [
 ];
 let rewardsByTypeAndTier = {
   scrapAndPop: {
-  1: [
+  one: [
     ['Tools', 25, 0, 1.05, 1, 0],
     ['Binoculars', 50, 0, 1.05, 1, 0],
     ['Wheel Barrel', 100, 0, 1.05, 1, 0],
@@ -20,28 +20,28 @@ let rewardsByTypeAndTier = {
     ['GPS Mapping', 1600, 0, 1.05, 1, 0],
     ['Drones', 3200, 0, 1.05, 1, 0]
   ],
-  2: [
+  two: [
     ['Shack', 50, 0, 1, 1, 1],
     ['Tree House', 100, 0, 1, 1, 1],
     ['Modular House', 200, 0, 1, 1, 1],
     ['Small Bunker', 400, 0, 1, 1, 1],
     ['Converted Van', 800, 0, 1, 1, 1],
   ],
-  3: [
+  three: [
     ['Cabin', 100, 0, 1, 1, 3],
     ['House', 200, 0, 1, 1, 3],
     ['Garage', 400, 0, 1, 1, 3],
     ['Bunker', 800, 0, 1, 1, 3],
     ['Mansion', 1600, 0, 1, 1, 3],
   ],
-  4: [
+  four: [
     ['Shop', 200, 0, 2, 1, 0],
     ['Junk Yard', 400, 0, 2, 1, 0],
     ['Construction Yard', 800, 0, 2, 1, 0],
     ['Factory', 1600, 0, 2, 1, 0],
     ['Armory', 3200, 0, 2, 1, 0],
   ],
-  5: [
+  five: [
     ['Basic Filtration System', 350, 0, 3.5, 1, 3],
     ['Chemical Work Stations', 750, 0, 3.5, 1, 3],
     ['Large Scale Filtration', 1500, 0, 3.5, 1, 3],
@@ -49,7 +49,7 @@ let rewardsByTypeAndTier = {
     ['Medical Laboratory', 6000, 0, 3.5, 1, 3],
   ]},
   food: {
-    1: [
+    one: [
       ['Planters', 20, 0, 1, 1.05, 0],
       ['Robust Pots', 40, 0, 1, 1.05, 0],
       ['Nutritional Soil', 80, 0, 1, 1.05, 0],
@@ -59,28 +59,28 @@ let rewardsByTypeAndTier = {
       ['GMO Plants', 1280, 0, 1, 1.05, 0],
       ['Camera Monitoring', 2560, 0, 1, 1.05, 0],
     ],
-    2: [
+    two: [
       ['Basic Gardens', 40, 20, 1, 1.12, 0],
       ['Large Gardens', 80, 40, 1, 1.12, 0],
       ['Advanced Gardens', 160, 80, 1, 1.12, 0],
       ['Hydroponic Gardens', 320, 160, 1, 1.12, 0],
       ['Climate Controlled Gardens', 640, 320, 1, 1.12, 0],
     ],
-    3: [
+    three: [
       ['Basic Green Houses', 100, 0, 1, 1.25, 0],
       ['Large Green Houses', 200, 0, 1, 1.25, 0],
       ['Advanced Green Houses', 400, 0, 1, 1.25, 0],
       ['Camera Monitored Green Houses', 800, 0, 1, 1.25, 0],
       ['Automated Green Houses', 1600, 0, 1, 1.25, 0],
     ],
-    4: [
+    four: [
       ['Basic Farms', 250, 200, 1, 2, 0],
       ['Large Farms', 250, 200, 1, 2, 0],
       ['Nutrient Rich Farms', 250, 200, 1, 2, 0],
       ['High-Yield Farms', 250, 200, 1, 2, 0],
       ['Massive Farms', 250, 200, 1, 2, 0],
     ],
-    5: [
+    five: [
       ['Basic Ranches', 1000, 400, 1, .25, 0],  //.10 chance of harvest
       ['Large Ranches', 2000, 800, 1, .5, 0],  //.20 chance of harvest
       ['Advanced Ranches', 4000, 1600, 1, 1, 0],  //.40 chance of harvest
@@ -88,7 +88,7 @@ let rewardsByTypeAndTier = {
       ['Cloning Ranches', 16000, 6400, 1, 1, 0],  //1.0 chance of harvest
     ]
   }
-}
+};
 let rewards = [
   ['Tools', 25, 1.05, 0],
   ['Shack', 50, 1, 1],
@@ -645,12 +645,13 @@ document.getElementById("add-points").addEventListener("click", function(){
 });
 
 document.getElementById('add-tools').addEventListener("click", function(){ 
-  if (rewardsByTypeAndTier.scrapAndPop.1.length <= colony.currentRewardPerType[0][0]) {
-    if (colony.addReward(rewardsByTypeAndTier.scrapAndPop.1[colony.currentRewardPerType[0][0]])) {
-      game.buildProgressBoardElement(rewardsByTypeAndTier.scrapAndPop.1[colony.currentRewardPerType[0][0]]);
+  if (rewardsByTypeAndTier.scrapAndPop.one.length <= colony.currentRewardPerType[0][0]) {
+    if (colony.addReward(rewardsByTypeAndTier.scrapAndPop.one[colony.currentRewardPerType[0][0]])) {
+      game.buildProgressBoardElement(rewardsByTypeAndTier.scrapAndPop.one[colony.currentRewardPerType[0][0]]);
       game.updateScrapCounter();
       game.updatePopCounter();
-      updateRewardButtonAndText(document.getElementById('add-tools'), rewardsByTypeAndTier.scrapAndPop.1[colony.currentRewardPerType[0][0]]);
+      updateRewardButtonAndText(document.getElementById('add-tools'), rewardsByTypeAndTier.scrapAndPop.one[colony.currentRewardPerType[0][0]]);
+      colony.currentRewardPerType[0][0]++;
     } else {alert('You do not meet the requirements for this item.');}
   } else {
     alert("You've purchased all of the rewards available.");
