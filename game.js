@@ -645,7 +645,7 @@ document.getElementById("add-points").addEventListener("click", function(){
 });
 
 document.getElementById('add-tools').addEventListener("click", function(){ 
-  if (rewardsByTypeAndTier.scrapAndPop.one.length <= colony.currentRewardPerType[0][0]) {
+  if (rewardsByTypeAndTier.scrapAndPop.one.length >= colony.currentRewardPerType[0][0]) {
     if (colony.addReward(rewardsByTypeAndTier.scrapAndPop.one[colony.currentRewardPerType[0][0]])) {
       game.buildProgressBoardElement(rewardsByTypeAndTier.scrapAndPop.one[colony.currentRewardPerType[0][0]]);
       game.updateScrapCounter();
