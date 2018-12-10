@@ -1,4 +1,4 @@
-import { tierOneRewards, rewards, ranchRandomEvents, tierOneFoodrewards, foodRewards, climates, inventoryItems, randomEvents } from 'game-data';
+import tierOneRewards, rewards, ranchRandomEvents, tierOneFoodrewards, foodRewards, climates, inventoryItems, randomEvents from 'game-data';
 
 // let tierOneRewards = [
 //   ['Tools', 25],
