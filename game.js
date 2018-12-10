@@ -650,6 +650,7 @@ document.getElementById('add-tools').addEventListener("click", function(){
       game.buildProgressBoardElement(rewardsByTypeAndTier.scrapAndPop.one[colony.currentRewardPerType[0][0]]);
       game.updateScrapCounter();
       game.updatePopCounter();
+      game.updateFoodCounter();
       updateRewardButtonAndText(document.getElementById('add-tools'), rewardsByTypeAndTier.scrapAndPop.one[colony.currentRewardPerType[0][0]]);
       colony.currentRewardPerType[0][0]++;
     } else {alert('You do not meet the requirements for this item.');}
