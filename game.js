@@ -495,7 +495,7 @@ const completeRewardIfEnoughItems = (reward, rewardCounter, elm) => {
 
 const ifHarvestTextContentThenReset = () => {
   if (document.getElementById('harvest-text') != '') {
-    codument.getElementById('harvest-text').textContent = '';
+    document.getElementById('harvest-text').textContent = '';
   }
 };
 
