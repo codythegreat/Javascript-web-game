@@ -385,8 +385,8 @@ class Colony {
 	((this.allowedPopulation - this.survivors) >= reward[5] || reward[5] == 0)) {
       this.rewards.push(reward);
       this.updateStatsNewestReward(reward);
-      this.updateScrap(-reward[3]);
-      this.updateFood(-reward[4]);
+      this.updateScrap(-reward[1]);
+      this.updateFood(-reward[2]);
       return true;
     } else {
       return false;
@@ -465,7 +465,7 @@ let colony = new Colony;
 
 const updateRewardButtonAndText = (buttonElm, reward) => {
   buttonElm.textContent = `${reward[0]} | ${reward[1]} scrap and ${reward[2]} food`
-}
+};
 
 const completeAllRewardRequirements = (reward) => {
     if (colony.addReward(reward) == true) {
@@ -473,8 +473,22 @@ const completeAllRewardRequirements = (reward) => {
     game.updateScrapCounter();
     game.updatePopCounter();
     game.updateFoodCounter();
-	} else {alert('You do not meet the requirements for this item.');}
-}
+    return true;
+	} else {
+    alert('You do not meet the requirements for this item.');
+    return false;
+  }
+};
+
+const completeRewardIfEnoughItems = (reward, rewardCounter, elm) => {
+    if (reward[rewardCounter]) {
+    if (completeAllRewardRequirements(reward[rewardCounter])) {    
+      updateRewardButtonAndText(elm, reward[rewardCounter+1]);
+    }
+  } else {
+    alert("You've purchased all of the rewards available.");
+  }
+};
 
 const completeAllFoodRewardRequirements = (reward) => {
   if (colony.addFoodReward(reward) == true) {
@@ -646,21 +660,21 @@ document.getElementById("add-points").addEventListener("click", function(){
 
 document.getElementById('add-tools').addEventListener("click", function(){ 
   if (rewardsByTypeAndTier.scrapAndPop.one.length >= colony.currentRewardPerType[0][0]) {
-    if (colony.addReward(rewardsByTypeAndTier.scrapAndPop.one[colony.currentRewardPerType[0][0]])) {
-      game.buildProgressBoardElement(rewardsByTypeAndTier.scrapAndPop.one[colony.currentRewardPerType[0][0]]);
-      game.updateScrapCounter();
-      game.updatePopCounter();
-      game.updateFoodCounter();
-      updateRewardButtonAndText(document.getElementById('add-tools'), rewardsByTypeAndTier.scrapAndPop.one[colony.currentRewardPerType[0][0]]);
+    if (completeAllRewardRequirements(rewardsByTypeAndTier.scrapAndPop.one[colony.currentRewardPerType[0][0]])) {    
       colony.currentRewardPerType[0][0]++;
-    } else {alert('You do not meet the requirements for this item.');}
+      updateRewardButtonAndText(document.getElementById('add-tools'), rewardsByTypeAndTier.scrapAndPop.one[colony.currentRewardPerType[0][0]]);
+    }
   } else {
     alert("You've purchased all of the rewards available.");
   }
 });
 
-document.getElementById('add-shack').addEventListener("click", function(){ 
-  completeAllRewardRequirements(rewards[1]);
+document.getElementById('add-shack').addEventListener("click", function(e){ 
+  completeRewardIfEnoughItems(rewardsByTypeAndTier.scrapAndPop.two, colony.currentRewardPerType[0][1], e.target);
+  colony.currentRewardPerType[0][1]++;
+  if (colony.rewards.includes(rewardsByTypeAndTier.scrapAndPop.two[rewardsByTypeAndTier.scrapAndPop.two.length - 1])) {
+    e.target.style.visibility = "hidden";
+  }
 });
 
 document.getElementById('add-house').addEventListener("click", function(){ 
