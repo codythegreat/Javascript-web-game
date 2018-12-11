@@ -674,44 +674,39 @@ document.getElementById('add-tools').addEventListener("click", function(){
 document.getElementById('add-shack').addEventListener("click", function(e){ 
   completeRewardIfEnoughItems(rewardsByTypeAndTier.scrapAndPop.two, colony.currentRewardPerType[0][1], e.target);
   colony.currentRewardPerType[0][1]++;
-  if (colony.rewards.includes(rewardsByTypeAndTier.scrapAndPop.two[rewardsByTypeAndTier.scrapAndPop.two.length - 1])) {
-    e.target.style.visibility = "hidden";
-  }
 });
 
-document.getElementById('add-house').addEventListener("click", function(){ 
-  completeAllRewardRequirements(rewards[2]);
+document.getElementById('add-house').addEventListener("click", function(e){ 
+  completeRewardIfEnoughItems(rewardsByTypeAndTier.scrapAndPop.three, colony.currentRewardPerType[0][2], e.target);
+  colony.currentRewardPerType[0][2]++;
 });
 
-document.getElementById('add-factory').addEventListener("click", function(){ 
-  completeAllRewardRequirements(rewards[3]);
+document.getElementById('add-factory').addEventListener("click", function(e){ 
+  completeRewardIfEnoughItems(rewardsByTypeAndTier.scrapAndPop.four, colony.currentRewardPerType[0][3], e.target);
+  colony.currentRewardPerType[0][3]++;
 });
 
-document.getElementById('add-lab').addEventListener("click", function(){ 
-  completeAllRewardRequirements(rewards[4]);
+document.getElementById('add-lab').addEventListener("click", function(e){ 
+  completeRewardIfEnoughItems(rewardsByTypeAndTier.scrapAndPop.five, colony.currentRewardPerType[0][4], e.target);
+  colony.currentRewardPerType[0][4]++;
 });
 
-document.getElementById('add-food-tier-1').addEventListener("click", function(){ 
-  if (tierOneFoodRewards[colony.tierOneFoodItems]) {
-    if (colony.addTierOneFoodReward(tierOneFoodRewards[colony.tierOneFoodItems])) {
-      game.buildProgressBoardElement(tierOneFoodRewards[colony.tierOneFoodItems - 1]);
-      game.updateScrapCounter();
-      game.updatePopCounter();
-      updateFoodRewardButtonElement();
-    } else {alert('You do not meet the requirements for this item.');}
-  } else {
-    alert("You've purchases all of the rewards available.");
-  }
+document.getElementById('add-food-tier-1').addEventListener("click", function(e){ 
+  completeRewardIfEnoughItems(rewardsByTypeAndTier.food.one, colony.currentRewardPerType[1][0], e.target);
+  colony.currentRewardPerType[1][0]++;
 });
 
-document.getElementById('add-garden').addEventListener("click", function(){ 
-  completeAllFoodRewardRequirements(foodRewards[1]);
+document.getElementById('add-garden').addEventListener("click", function(e){ 
+  completeRewardIfEnoughItems(rewardsByTypeAndTier.food.two, colony.currentRewardPerType[1][1], e.target);
+  colony.currentRewardPerType[1][1]++;
 });
 
-document.getElementById('add-greenhouse').addEventListener("click", function(){ 
-  completeAllFoodRewardRequirements(foodRewards[2]);
+document.getElementById('add-greenhouse').addEventListener("click", function(e){ 
+  completeRewardIfEnoughItems(rewardsByTypeAndTier.food.three, colony.currentRewardPerType[1][2], e.target);
+  colony.currentRewardPerType[1][2]++;
 });
 
-document.getElementById('add-farm').addEventListener("click", function(){ 
-  completeAllFoodRewardRequirements(foodRewards[3]);
+document.getElementById('add-farm').addEventListener("click", function(e){ 
+  completeRewardIfEnoughItems(rewardsByTypeAndTier.food.four, colony.currentRewardPerType[1][3], e.target);
+  colony.currentRewardPerType[1][3]++;
 });
