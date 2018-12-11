@@ -324,6 +324,7 @@ class Colony {
     this.tempFoodProd = 1;
     this.disease = 0;
     this.randomEventTimer = 0;
+    this.currentChanceHarvest = 0;
     this.currentRewardPerType = [
       [0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0]  //tracks which reward we are at for each reward type
@@ -420,7 +421,7 @@ class Colony {
 
 class GameState {
   constructor() {
-  	this.currentDay = 1;
+    this.currentDay = 1;
     this.foodCost = 100 * 1;
     this.wanderingSurvivors = 20;
     this.climate = climates[0];
@@ -491,6 +492,21 @@ const completeRewardIfEnoughItems = (reward, rewardCounter, elm) => {
     alert("You've purchased all of the rewards available.");
   }
 };
+
+const ifHarvestTextContentThenReset = () => {
+  if (document.getElementById('harvest-text') != '') {
+    codument.getElementById('harvest-text').textContent = '';
+  }
+};
+
+const dailyChanceOfHarvest = () => {
+	chance = Math.random();
+  if (chance.toFixed(2) <= colony.currentChanceHarvest) {
+    randomHarvest = ranchRandomEvents[Math.floor(Math.random()*3)];
+    colony.updateFood(randomHarvest.foodChange);
+    document.getElementById('harvest-text').textContent = randomHarvest.text;
+  }
+}
 
 const completeAllFoodRewardRequirements = (reward) => {
   if (colony.addFoodReward(reward) == true) {
@@ -649,7 +665,9 @@ document.getElementById("add-colony-name").addEventListener("click", function(){
 });
 
 document.getElementById("add-points").addEventListener("click", function(){
-  chanceOfRandomEventIfTimerZero(); 
+  ifHarvestTextContentThenReset();
+  chanceOfRandomEventIfTimerZero();
+  dailyChanceOfHarvest();
   pointButtonLoading();
   setTimeout(function() {
     advanceOneGameDay();
@@ -707,6 +725,8 @@ document.getElementById('add-farm').addEventListener("click", function(e){
   colony.currentRewardPerType[1][3]++;
 });
 
-document.getElementById('buy-food').addEventListener("click", function(){ 
-  completeAllBuyFoodRequirements();
+document.getElementById('add-ranch').addEventListener("click", function(e){ 
+  completeRewardIfEnoughItems(rewardsByTypeAndTier.food.five, colony.currentRewardPerType[1][4], e.target);
+  colony.currentRewardPerType[1][4]++;
+  colony.currentChanceHarvest += .20;
 });
