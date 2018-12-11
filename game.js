@@ -637,10 +637,6 @@ const updateRewardButtonElement = () => {
   document.getElementById('add-tools-text').textContent = `5% scrap efficiency boost | ${tierOneRewards[colony.tierOneItems][1]} scrap`;
 }
 
-document.getElementById('buy-food').addEventListener("click", function(){ 
-  completeAllBuyFoodRequirements();
-});
-
 document.getElementById("add-colony-name").addEventListener("click", function(){
   initColonyWithName();
   document.getElementById("add-colony-name").style.visibility = "hidden";
@@ -709,4 +705,8 @@ document.getElementById('add-greenhouse').addEventListener("click", function(e){
 document.getElementById('add-farm').addEventListener("click", function(e){ 
   completeRewardIfEnoughItems(rewardsByTypeAndTier.food.four, colony.currentRewardPerType[1][3], e.target);
   colony.currentRewardPerType[1][3]++;
+});
+
+document.getElementById('buy-food').addEventListener("click", function(){ 
+  completeAllBuyFoodRequirements();
 });
