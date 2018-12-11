@@ -464,7 +464,9 @@ let game = new GameState;
 let colony = new Colony;
 
 const updateRewardButtonAndText = (buttonElm, reward) => {
-  buttonElm.textContent = `${reward[0]} | ${reward[1]} scrap and ${reward[2]} food`
+  if (reward[0] != 'undefined') {
+    buttonElm.textContent = `${reward[0]} | ${reward[1]} scrap and ${reward[2]} food`
+  } else {buttonElm.style.visibility = 'hidden';}
 };
 
 const completeAllRewardRequirements = (reward) => {
