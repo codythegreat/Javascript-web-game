@@ -42,9 +42,9 @@ let rewardsByTypeAndTier = {
     ['Armory', 3200, 0, 2, 1, 0],
   ],
   five: [
-    ['Basic Filtration System', 350, 0, 3.5, 1, 3],
-    ['Chemical Work Stations', 750, 0, 3.5, 1, 3],
-    ['Large Scale Filtration', 1500, 0, 3.5, 1, 3],
+    ['Basic Filtration', 350, 0, 3.5, 1, 3],
+    ['Chemical Stations', 750, 0, 3.5, 1, 3],
+    ['Large Filtration', 1500, 0, 3.5, 1, 3],
     ['Laboratory', 3000, 0, 3.5, 1, 3],
     ['Medical Laboratory', 6000, 0, 3.5, 1, 3],
   ]},
