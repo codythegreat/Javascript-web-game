@@ -487,9 +487,11 @@ const completeRewardIfEnoughItems = (reward, rewardCounter, elm) => {
     if (reward[rewardCounter]) {
     if (completeAllRewardRequirements(reward[rewardCounter])) {    
       updateRewardButtonAndText(elm, reward[rewardCounter+1]);
+      return true;
     }
   } else {
     alert("You've purchased all of the rewards available.");
+    return false;
   }
 };
 
@@ -674,59 +676,63 @@ document.getElementById("add-points").addEventListener("click", function(){
   }, 900);
 });
 
-document.getElementById('add-tools').addEventListener("click", function(){ 
-  if (rewardsByTypeAndTier.scrapAndPop.one.length >= colony.currentRewardPerType[0][0]) {
-    if (completeAllRewardRequirements(rewardsByTypeAndTier.scrapAndPop.one[colony.currentRewardPerType[0][0]])) {    
-      colony.currentRewardPerType[0][0]++;
-      updateRewardButtonAndText(document.getElementById('add-tools'), rewardsByTypeAndTier.scrapAndPop.one[colony.currentRewardPerType[0][0]]);
-    }
-  } else {
-    alert("You've purchased all of the rewards available.");
+document.getElementById('add-tools').addEventListener("click", function(e){ 
+  if (completeRewardIfEnoughItems(rewardsByTypeAndTier.scrapAndPop.one, colony.currentRewardPerType[0][0], e.target)) {
+    colony.currentRewardPerType[0][0]++;
   }
 });
 
 document.getElementById('add-shack').addEventListener("click", function(e){ 
-  completeRewardIfEnoughItems(rewardsByTypeAndTier.scrapAndPop.two, colony.currentRewardPerType[0][1], e.target);
-  colony.currentRewardPerType[0][1]++;
+  if (completeRewardIfEnoughItems(rewardsByTypeAndTier.scrapAndPop.two, colony.currentRewardPerType[0][1], e.target)) {
+    colony.currentRewardPerType[0][1]++;
+  }
 });
 
 document.getElementById('add-house').addEventListener("click", function(e){ 
-  completeRewardIfEnoughItems(rewardsByTypeAndTier.scrapAndPop.three, colony.currentRewardPerType[0][2], e.target);
-  colony.currentRewardPerType[0][2]++;
+  if (completeRewardIfEnoughItems(rewardsByTypeAndTier.scrapAndPop.three, colony.currentRewardPerType[0][2], e.target)) {
+    colony.currentRewardPerType[0][2]++;
+  }
 });
 
 document.getElementById('add-factory').addEventListener("click", function(e){ 
-  completeRewardIfEnoughItems(rewardsByTypeAndTier.scrapAndPop.four, colony.currentRewardPerType[0][3], e.target);
-  colony.currentRewardPerType[0][3]++;
+  if (completeRewardIfEnoughItems(rewardsByTypeAndTier.scrapAndPop.four, colony.currentRewardPerType[0][3], e.target)) {
+    colony.currentRewardPerType[0][3]++;
+  }
 });
 
 document.getElementById('add-lab').addEventListener("click", function(e){ 
-  completeRewardIfEnoughItems(rewardsByTypeAndTier.scrapAndPop.five, colony.currentRewardPerType[0][4], e.target);
-  colony.currentRewardPerType[0][4]++;
+  if (completeRewardIfEnoughItems(rewardsByTypeAndTier.scrapAndPop.five, colony.currentRewardPerType[0][4], e.target)) {
+    colony.currentRewardPerType[0][4]++;
+  }
 });
 
 document.getElementById('add-food-tier-1').addEventListener("click", function(e){ 
-  completeRewardIfEnoughItems(rewardsByTypeAndTier.food.one, colony.currentRewardPerType[1][0], e.target);
-  colony.currentRewardPerType[1][0]++;
+  if (completeRewardIfEnoughItems(rewardsByTypeAndTier.food.one, colony.currentRewardPerType[1][0], e.target)) {
+    colony.currentRewardPerType[1][0]++;
+  }
 });
 
 document.getElementById('add-garden').addEventListener("click", function(e){ 
-  completeRewardIfEnoughItems(rewardsByTypeAndTier.food.two, colony.currentRewardPerType[1][1], e.target);
-  colony.currentRewardPerType[1][1]++;
+  if (completeRewardIfEnoughItems(rewardsByTypeAndTier.food.two, colony.currentRewardPerType[1][1], e.target)) {
+    colony.currentRewardPerType[1][1]++;
+  }
 });
 
 document.getElementById('add-greenhouse').addEventListener("click", function(e){ 
-  completeRewardIfEnoughItems(rewardsByTypeAndTier.food.three, colony.currentRewardPerType[1][2], e.target);
-  colony.currentRewardPerType[1][2]++;
+  if (completeRewardIfEnoughItems(rewardsByTypeAndTier.food.three, colony.currentRewardPerType[1][2], e.target)) {
+    colony.currentRewardPerType[1][2]++;
+  }
 });
 
 document.getElementById('add-farm').addEventListener("click", function(e){ 
-  completeRewardIfEnoughItems(rewardsByTypeAndTier.food.four, colony.currentRewardPerType[1][3], e.target);
-  colony.currentRewardPerType[1][3]++;
+  if (completeRewardIfEnoughItems(rewardsByTypeAndTier.food.four, colony.currentRewardPerType[1][3], e.target)) {
+    colony.currentRewardPerType[1][3]++;
+  }
 });
 
 document.getElementById('add-ranch').addEventListener("click", function(e){ 
-  completeRewardIfEnoughItems(rewardsByTypeAndTier.food.five, colony.currentRewardPerType[1][4], e.target);
-  colony.currentRewardPerType[1][4]++;
-  colony.currentChanceHarvest += .20;
+  if (completeRewardIfEnoughItems(rewardsByTypeAndTier.food.five, colony.currentRewardPerType[1][4], e.target)) {
+    colony.currentRewardPerType[1][4]++;
+    colony.currentChanceHarvest += .20;
+  }
 });
