@@ -1,13 +1,20 @@
-let tierOneRewards = [
-  ['Tools', 25],
-  ['Binoculars', 50],
-  ['Wheel Barrel', 100],
-  ['Metal Detectors', 200],
-  ['Power Tools', 400],
-  ['Trucks', 800],
-  ['GPS Mapping', 1600],
-  ['Drones', 3200]
+let climates = [
+  ['Radiated Sunshine', 1],
+  ['Ash Overcast', .8],
+  ['Deadly Winds', .5],
+  ['Acid Rain', .3],
+  ['Nuclear Winter', .1]
 ];
+
+let inventoryItems = [
+  ['ammo', 15],
+  ['leather', 15],
+  ['batteries', 20],
+  ['electronics', 25],
+  ['sheet metal', 5],
+  ['wood', 5],
+];
+
 let rewardsByTypeAndTier = {
   scrapAndPop: {
   one: [
@@ -89,13 +96,7 @@ let rewardsByTypeAndTier = {
     ]
   }
 };
-let rewards = [
-  ['Tools', 25, 1.05, 0],
-  ['Shack', 50, 1, 1],
-  ['House', 100, 1, 3],
-  ['Factory', 200, 2, 0],
-  ['Laboratory', 350, 3.5, 3]
-];
+
 let ranchRandomEvents = [
   {
     text: 'A couple of chickens were harvested. +50 food',
@@ -131,38 +132,7 @@ let ranchRandomEvents = [
     timer: 1,
   },
 ];
-let tierOneFoodRewards = [
-  ['Planters', 20],
-  ['Robust Pots', 40],
-  ['Nutritional Soil', 80],
-  ['Lights', 160],
-  ['Rain Collector', 320],
-  ['Pesticides', 640],
-  ['GMO Plants', 1280],
-  ['Camera Monitoring', 2560],
-];
-let foodRewards = [
-  ['Planter', 20, 1.05, 0],
-  ['Garden', 40, 1.12, 20],
-  ['Green House', 100, 1.25, 0],
-  ['Farm', 250, 2, 200],
-  ['Ranch', 1000, .25, 400],	//ranch looks bad on paper, but this also adds random events to harvest animals.
-];
-let climates = [
-  ['Radiated Sunshine', 1],
-  ['Ash Overcast', .8],
-  ['Deadly Winds', .5],
-  ['Acid Rain', .3],
-  ['Nuclear Winter', .1]
-];
-let inventoryItems = [
-  ['ammo', 15],
-  ['leather', 15],
-  ['batteries', 20],
-  ['electronics', 25],
-  ['sheet metal', 5],
-  ['wood', 5],
-];
+
 let randomEvents = [
   {
     text: 'A survivor was shot in combat. -1 survivor',
@@ -318,7 +288,6 @@ class Colony {
     this.foodMultiplier = 1;
     this.rewards = [];
     this.survivors = 3;
-    this.foodPurchases = 0;
     this.inventory = [];
     this.tempScrapProd = 1;
     this.tempFoodProd = 1;
@@ -345,9 +314,6 @@ class Colony {
     this.foodMultiplier *= reward[4];
     this.survivors += reward[5];
   }
-  updateStatsNewestFoodReward(reward) {
-    this.foodMultiplier *= reward[2];
-  }
   updateStatsAllRewards() {
     newScrapMultiplier = 1;
     newSurvivors = 1;
@@ -357,28 +323,6 @@ class Colony {
     }
     this.scrapMultiplier = newScrapMultiplier;
     this.survivors = newSurvivors;
-  }
-  addTierOneReward(reward) {
-    if (this.scrap >= reward[1]) {
-      this.rewards.push(reward);
-      this.scrapMultiplier *= 1.05;
-      this.updateScrap(-reward[1]);
-      this.tierOneItems++;
-      return true;
-    } else {
-      return false;
-    }
-  }
-  addTierOneFoodReward(reward) {
-    if (this.scrap >= reward[1]) {
-      this.rewards.push(reward);
-      this.foodMultiplier *= 1.05;
-      this.updateScrap(-reward[1]);
-      this.tierOneFoodItems++;
-      return true;
-    } else {
-      return false;
-    }
   }
   addReward(reward) {
     if (this.scrap >= reward[1] && 
@@ -393,29 +337,8 @@ class Colony {
       return false;
     }
   }
-  addFoodReward(reward) {
-    if (this.scrap >= reward[1] && this.food >= reward[3]) {
-      this.rewards.push(reward);
-      this.updateStatsNewestFoodReward(reward);
-      this.updateScrap(-reward[1]);
-      this.updateFood(-reward[3]);
-      return true;
-    } else {
-      return false;
-    }
-  }
   get allowedPopulation() {
     return 1 + Math.floor(this.scrap / 10000) + Math.floor(this.food / 100); 
-  }
-  buyFood() {
-  	if (this.scrap >= 100 * (this.foodPurchases + 1)) {
-  	  this.food += 1000;
-  	  this.scrap -= 100 * (this.foodPurchases + 1);
-  	  this.foodPurchases++;
-  	  return true;
-  	} else {
-      return false;
-  	}
   }
 }
 
@@ -508,23 +431,7 @@ const dailyChanceOfHarvest = () => {
     colony.updateFood(randomHarvest.foodChange);
     document.getElementById('harvest-text').textContent = randomHarvest.text;
   }
-}
-
-const completeAllFoodRewardRequirements = (reward) => {
-  if (colony.addFoodReward(reward) == true) {
-    game.buildProgressBoardElement(reward);
-    game.updateScrapCounter();
-    game.updateFoodCounter();
-  } else {alert('You do not meet the requirements for this item.');}
-}
-
-const completeAllBuyFoodRequirements = () => {
-    if (colony.buyFood() == true) {
-    game.updateFoodCounter();
-    game.updateFoodButton();
-    game.updateScrapCounter();
-    } else {alert('You do not meet the requirements for this item.');}
-} 
+};
 
 const initColonyWithName = () => {
   colonyName = document.getElementById('colony-name-input').value;
@@ -542,35 +449,36 @@ const initColonyWithName = () => {
   } else {
     alert('Please type a name for your colony.');
   }
-}
+};
 
 const gameOverIfZeroFood = () => {
 	if (colony.food <= 0) {
 	  alert('You have run out of food. Game over.');
 	  document.getElementById('add-points').style.visibility = "hidden";
 	}
-}
+};
 
 const gameOverIfZeroSurvivors = () => {
   if (colony.survivors == 0) {
     alert('Your survivors have perished. Play again, you may get further!');
     document.getElementById('add-points').style.visibility = 'hidden';
   }
-}
+};
 
 const scrapAmountAllVariables = () => {
   return colony.survivors * colony.scrapMultiplier * colony.tempScrapProd * game.climate[1];
-}
+};
+
 const foodAmountAllVariables = () => {
   return colony.survivors * colony.foodMultiplier * colony.tempFoodProd * game.climate[1];	
-}
+};
 
 const resetRandomEventVariables = () => {
   colony.tempScrapProd = 1;
   colony.tempFoodProd = 1;
   colony.disease = 0;
   game.randomEventDisplay.textContent = '';
-}
+};
 
 const advanceOneGameDay = () => {
   if (colony.randomEventTimer > 0) {colony.randomEventTimer--;}
@@ -590,7 +498,7 @@ const advanceOneGameDay = () => {
     gameOverIfZeroFood();
     gameOverIfZeroSurvivors();
   } else {alert('Please name your colony.');}
-}
+};
 
 const pointButtonLoading = () => {
   document.getElementById("add-points").disabled = true;
@@ -599,7 +507,7 @@ const pointButtonLoading = () => {
     document.getElementById("add-points").disabled = false;
     document.getElementById("add-points").textContent = "Advance One Day";
   }, 1000);
-}
+};
 
 const addElementForInventoryItem = (item) => {
   let btn = document.createElement('button');
@@ -615,7 +523,7 @@ const addElementForInventoryItem = (item) => {
     btn.parentNode.removeChild(btn);
     game.updateScrapCounter();
   }
-}
+};
 
 const addRandomEvent = () => {
   let randomEvent = randomEvents[Math.floor(Math.random()*randomEvents.length)];
@@ -635,7 +543,7 @@ const addRandomEvent = () => {
     addElementForInventoryItem(item);
   }
   game.randomEventDisplay.textContent = randomEvent.text + inventoryItemsAdded.substring(0, inventoryItemsAdded.length - 2);
-}
+};
 
 const chanceOfRandomEventIfTimerZero = () => {
   if (colony.randomEventTimer == 0) {
@@ -643,17 +551,7 @@ const chanceOfRandomEventIfTimerZero = () => {
       addRandomEvent();
     }
   }
-}
-
-const updateFoodRewardButtonElement = () => {
-  document.getElementById('add-food-tier-1').textContent = `Add ${tierOneFoodRewards[colony.tierOneFoodItems][0]}`;
-  document.getElementById('add-food-tier-1-cost').textContent = `5% food efficiency boost | ${tierOneFoodRewards[colony.tierOneFoodItems][1]} scrap`;
-}
-
-const updateRewardButtonElement = () => {
-  document.getElementById('add-tools').textContent = `Add ${tierOneRewards[colony.tierOneItems][0]}`;
-  document.getElementById('add-tools-text').textContent = `5% scrap efficiency boost | ${tierOneRewards[colony.tierOneItems][1]} scrap`;
-}
+};
 
 document.getElementById("add-colony-name").addEventListener("click", function(){
   initColonyWithName();
