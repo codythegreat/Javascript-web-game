@@ -562,6 +562,15 @@ document.getElementById("add-colony-name").addEventListener("click", function(){
   document.getElementById("food-radio").style.visibility = "inherit";
   document.getElementById("label-scrap-radio").style.visibility = "inherit";
   document.getElementById("label-food-radio").style.visibility = "inherit";
+  for (let button of document.getElementsByClassName("btn btn-danger")) {
+    button.style.visibility = "inherit";
+  }
+  for (let button of document.getElementsByClassName("btn btn-success")) {
+    button.style.visibility = "inherit";
+  }
+  for (let text of document.getElementsByClassName("button-text")) {
+    text.style.visibility = "inherit";
+  }
 });
 
 document.getElementById("add-points").addEventListener("click", function(){
